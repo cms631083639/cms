@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+
+        ul {
+            position: relative;
+            width: 366px;
+            margin: 100px auto;
+        }
+
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border: 1px solid red;
+            float: left;
+            margin: 10px;
+
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<div></div>
+<script src="../jquery-1.12.3.min.js"></script>
+<script>
+    var li = document.getElementsByTagName ("li");
+    //    方法1
+    var zdx = 0;
+    for (var i = 0 ; i < li.length ; i++) {
+        li[i].innerHTML = "left:" + li[i].offsetLeft + "  right:" + li[i].offsetTop;
+        li[i].style.left = li[i].offsetLeft + "px";
+        li[i].style.top = li[i].offsetTop + "px";
+    }
+    for (var i = 0 ; i < li.length ; i++) {
+        li[i].style.position = "absolute";
+        li[i].innerHTML = "left:" + li[i].offsetLeft + "  right:" + li[i].offsetTop;
+    }
+    $ ("div").animate ({'width': 100, 'height': 100}, 1000);
+    //    //    方法2
+    //    for (var i = li.length - 1 ; i >= 0 ; i--) {
+    //        li[i].innerHTML = "left:" + li[i].offsetLeft + "  right:" + li[i].offsetTop;
+    //        li[i].style.left = li[i].offsetLeft + "px";
+    //        li[i].style.top = li[i].offsetTop + "px";
+    //        li[i].style.position = "absolute";
+    //        li[i].innerHTML = "left:" + li[i].offsetLeft + "  right:" + li[i].offsetTop;
+    //    }
+    for (var i = 0 ; i < li.length ; i++) {
+        li[i].onmouseenter = function () {
+            zdx++;
+            $ (this).animate ({'width': 150, 'height': 150, 'marginLeft': -15, 'marginTop': -15, 'zIndex': zdx}, 70);
+        }
+        li[i].onmouseleave = function () {
+            $ (this).animate ({'width': 100, 'height': 100, 'margin': 10},10);
+        }
+    }
+</script>
+</body>
+</html>
+

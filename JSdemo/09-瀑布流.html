@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .box {
+            float: left;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="container">
+    <!--(.box>img[src="images/P_00$.jpg"])*9-->
+    <div class="box"><img src="images/P_000.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_001.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_002.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_003.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_004.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_005.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_006.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_007.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_008.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_009.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_000.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_001.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_002.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_003.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_004.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_005.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_006.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_007.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_008.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_009.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_000.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_001.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_002.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_003.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_004.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_005.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_006.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_007.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_008.jpg" alt=""/></div>
+    <div class="box"><img src="images/P_009.jpg" alt=""/></div>
+</div>
+<script>
+    window.onload = function () {
+        new Falls ("container");
+    }
+    function Falls (id) {
+        var that = this;
+        this.cont = document.getElementById (id);
+        this.boxes = this.cont.children;
+        this.waterFall ();
+        window.onresize = function () {
+            that.waterFall ();
+        };
+        window.onscroll = function () {
+            that.tarchbottom ();
+        }
+    }
+
+    Falls.prototype.waterFall = function () {
+        this.allWidth = window.innerWidth;
+        this.boxWidth = this.boxes[0].offsetWidth;
+        this.column = Math.floor (this.allWidth / this.boxWidth);
+        this.arrHeight = [];
+        for (var i = 0 ; i < this.boxes.length ; i++) {
+            if (i < this.column) {
+                this.boxes[i].style.left = i * this.boxWidth + "px";
+                this.boxes[i].style.top = 0;
+                this.arrHeight.push (this.boxes[i].offsetHeight);
+            } else {
+                this.boxesLeftIndex = getMin (this.arrHeight).index;
+                this.boxesHeight = getMin (this.arrHeight).height;
+                this.boxes[i].style.position = "absolute";
+                this.boxes[i].style.left = this.boxes[this.boxesLeftIndex].offsetLeft + "px";
+                this.boxes[i].style.top = this.boxesHeight + "px";
+                this.arrHeight[this.boxesLeftIndex] = this.boxes[i].offsetHeight + this.arrHeight[this.boxesLeftIndex];
+            }
+        }
+    }
+    Falls.prototype.isbottom = function () {
+        var scrollT = window.pageYOffset;
+        var clientHeight = window.innerHeight;
+        var lastBoxTop = this.boxes[this.boxes.length - 1].offsetTop
+        if (scrollT + clientHeight > lastBoxTop) {
+            return true;
+        }
+    }
+    Falls.prototype.tarchbottom = function () {
+        if (this.isbottom ()) {
+            var json = [
+                {"src": "images/P_000.jpg"},
+                {"src": "images/P_001.jpg"},
+                {"src": "images/P_002.jpg"},
+                {"src": "images/P_003.jpg"},
+                {"src": "images/P_004.jpg"},
+                {"src": "images/P_005.jpg"},
+                {"src": "images/P_006.jpg"},
+                {"src": "images/P_007.jpg"},
+                {"src": "images/P_008.jpg"},
+                {"src": "images/P_009.jpg"},
+            ]
+            for (var i = 0 ; i < json.length ; i++) {
+                var div = document.createElement ("div");
+                var img = document.createElement ("img");
+                div.className = "box";
+                img.src = json[i].src;
+                div.appendChild (img);
+                this.cont.appendChild (div);
+            }
+            this.waterFall ();
+        }
+    }
+    function getMin (arr) {
+        var min = arr[0];
+        var index = 0;
+        for (var i = 0 ; i < arr.length ; i++) {
+            if (min > arr[i]) {
+                min = arr[i];
+                index = i;
+            }
+        }
+        var o = {
+            index: index,
+            height: min
+        };
+        return o;
+    }
+
+</script>
+</body>
+</html>

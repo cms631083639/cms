@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        body {
+            background-color: #333;
+        }
+
+        .nav {
+            width: 800px;
+            height: 42px;
+            margin: 100px auto;
+            /*background-color: red;*/
+            background: #fff url(images/rss.png) no-repeat right center;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .nav li {
+            width: 83px;
+            height: 42px;
+            /*background-color: red;*/
+            text-align: center;
+            line-height: 42px;
+            float: left;
+            cursor: pointer;
+        }
+
+        ul {
+            position: relative;
+        }
+
+        .nav span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 83px;
+            height: 42px;
+            background: url("images/cloud.gif") no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <span id="cloud"></span>
+    <ul id="navBar">
+        <li>HTML</li>
+        <li>JAVA</li>
+        <li>php</li>
+        <li>android</li>
+        <li>JavaScript</li>
+        <li>C</li>
+        <li>CSS</li>
+        <li>C#</li>
+    </ul>
+</div>
+<script>
+    window.onload = function () {
+        new Cloud ("navBar");
+    }
+    function Cloud (id) {
+        var that = this;
+        this.nav = document.getElementById (id);
+        this.cloud = document.getElementById ("cloud");
+        this.li = this.nav.children;
+        this.pos = 0;
+        for (var i = 0 ; i < this.li.length ; i++) {
+            this.li[i].onmouseover = function () {
+                that.animate (that.cloud, this.offsetLeft);
+            }
+            this.li[i].onmouseout = function () {
+                that.animate (that.cloud, that.pos);
+            };
+            this.li[i].onclick = function () {
+                that.pos = this.offsetLeft;
+            }
+        }
+    }
+    Cloud.prototype.animate = function (obj, target) {
+        clearInterval (obj.time);
+        obj.time = setInterval (function () {
+            obj.leader = obj.offsetLeft;
+            obj.step = (target - obj.leader) / 10;
+            obj.step = obj.step > 0 ? Math.ceil (obj.step) : Math.floor (obj.step);
+            if (Math.abs (obj.leader - target) > Math.abs (obj.step)) {
+                obj.style.left = obj.leader + obj.step + "px";
+            } else {
+                clearInterval (obj.time);
+                obj.style.left = target + "px";
+            }
+        }, 15)
+    }
+</script>
+</body>
+</html> 

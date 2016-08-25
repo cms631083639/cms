@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #change div {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            display: none;
+        }
+
+        #change .active {
+            display: block;
+            background-color: yellow;
+        }
+
+        #change .color {
+            background-color: yellow;
+        }
+
+    </style>
+    <script>
+        window.onload = function () {
+            new TabSwitch ("change");
+        }
+        function TabSwitch (elem) {
+            var change = document.getElementById (elem);
+            this.input = change.getElementsByTagName ("input");
+            this.div = change.getElementsByTagName ("div");
+            var that = this;
+            for (var i = 0 ; i < this.input.length ; i++) {
+                this.input[i].index = i;
+                this.input[i].onclick = function () {
+                    that.turn (this);
+                };
+            }
+        }
+        TabSwitch.prototype.turn = function (obj) {
+            for (var i = 0 ; i < this.input.length ; i++) {
+                this.input[i].className = "";
+                this.div[i].className = "";
+            }
+            obj.className = "color";
+            this.div[obj.index].className = "active";
+        }
+    </script>
+</head>
+<body>
+<div id="change">
+    <input type="button" value="按钮1" class="color"/>
+    <input type="button" value="按钮2"/>
+    <input type="button" value="按钮3"/>
+
+    <div class="active">1</div>
+    <div>2</div>
+    <div>3</div>
+</div>
+</body>
+</html>

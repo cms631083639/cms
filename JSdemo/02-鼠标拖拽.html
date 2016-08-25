@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #drag {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+        }
+
+        #abg {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+        }
+
+        #asd {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            new drag ("drag");
+            new drag ("abg");
+            new drag ("asd")
+        }
+        function drag (elem) {
+            var that = this;
+            this.disX = 0;
+            this.disY = 0;
+            this.drag = document.getElementById (elem);
+            this.drag.onmousedown = function () {
+                that.fnDown ();
+            };
+        }
+        drag.prototype.fnDown = function (ev) {
+            var that = this
+            var ev = ev || event;
+            this.disX = ev.offsetX;
+            this.disY = ev.offsetY;
+            document.onmousemove = function () {
+                that.fnMove ();
+            }
+            document.onmouseup = function () {
+                that.fnUp ();
+            }
+            return false;
+        }
+        drag.prototype.fnMove = function (ev) {
+            var ev = ev || event;
+            this.drag.style.left = ev.clientX - this.disX + "px";
+            this.drag.style.top = ev.clientY - this.disY + "px";
+        };
+        drag.prototype.fnUp = function () {
+            document.onmousemove = null;
+            document.onmousedown = null;
+        }
+    </script>
+</head>
+<body>
+<div id="drag"></div>
+<div id="abg"></div>
+<div id="asd"></div>
+</body>
+</html>
