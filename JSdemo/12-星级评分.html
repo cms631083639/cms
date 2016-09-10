@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>妙味课堂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #pingfen {
+            width: 135px;
+            margin: 10px auto;
+            height: 28px;
+        }
+
+        li {
+            width: 27px;
+            float: left;
+            height: 28px;
+            cursor: pointer;
+            background: url('images/star.gif') no-repeat 0 0;
+            list-style: none;
+        }
+
+        p {
+            display: none;
+            text-align: center;
+        }
+
+        .active {
+            background: url("images/star.gif") no-repeat 0 -29px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="pingfen">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p id="p">一般</p>
+</div>
+<script>
+    window.onload = function () {
+        new GradePoint ("pingfen");
+    }
+    function GradePoint (id) {
+        this.oDiv = document.getElementById (id);
+        var that = this;
+        this.oUl = this.oDiv.getElementsByTagName ("ul")[0];
+        this.oLi = this.oUl.getElementsByTagName ("li");
+        this.oP = document.getElementById ("p");
+        this.arr = ["一般", "还行", "不错", "推荐", "力荐"];
+        for (var i = 0 ; i < this.oLi.length ; i++) {
+            this.oLi[i].index = i;
+            this.oLi[i].onmouseover = function () {
+                that.starShow (this);
+            }
+            this.oLi[i].onmouseout = function () {
+                that.starHide ();
+            }
+            this.oLi[i].onclick = function () {
+                that.point (this);
+            }
+        }
+    }
+    GradePoint.prototype.starShow = function (index) {
+        this.oP.style.display = "block";
+        this.oP.innerHTML = this.arr[index.index];
+        for (var i = 0 ; i <= index.index ; i++) {
+            this.oLi[i].style.backgroundPositionY = "-29px";
+        }
+    };
+    GradePoint.prototype.starHide = function () {
+        this.oP.style.display = "none";
+        for (var i = 0 ; i < this.oLi.length ; i++) {
+            this.oLi[i].style.backgroundPositionY = 0;
+        }
+    };
+    GradePoint.prototype.point = function (index) {
+        alert (this.arr[index.index]);
+    };
+</script>
+</body>
+</html>

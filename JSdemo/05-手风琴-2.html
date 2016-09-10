@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        div {
+            width: 1370px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        div ul {
+            width: 1626px;
+        }
+
+        div li {
+            width: 275px;
+            height: 400px;
+            float: left;
+        }
+        div li:nth-child(1){
+            background-color: red;
+        }
+        div li:nth-child(2){
+            background-color: orange;
+        }
+        div li:nth-child(3){
+            background-color: yellow;
+        }
+        div li:nth-child(4){
+            background-color: green;
+        }
+        div li:nth-child(5){
+            background-color: red;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            new collapse ("box");
+        }
+        function collapse (id) {
+            var that = this;
+            this.box = document.getElementById (id);
+            this.ul = this.box.children[0];
+            this.lis = this.ul.children;
+            this.delayTime = null;
+            // 给每一个li动态的添加图片
+            for (var i = 0 ; i < this.lis.length ; i++) {
+                // this.lis[i].style.backgroundImage = "url(images/" + (i + 1) + ".jpg)";
+                this.lis[i].style.backgroundImage = "";
+                // 给每个li绑定鼠标经过事件  排他
+                this.lis[i].onmouseover = function () {
+                    var temp = this;
+                    that.fnOver (temp);
+                }
+                this.lis[i].onmouseout = function () {
+                    that.fnOut ();
+                }
+            }
+        }
+        collapse.prototype.fnOver = function (ele) {
+            clearTimeout (this.delayTime);
+            for (var i = 0 ; i < this.lis.length ; i++) {
+                this.animate (this.lis[i], {'width': 45});
+            }
+            this.animate (ele, {"width": 1226});
+        }
+        collapse.prototype.fnOut = function () {
+            var that = this;
+            this.delayTime = setTimeout (function () {
+                for (var i = 0 ; i < that.lis.length ; i++) {
+                    that.animate (that.lis[i], {'width': 275});
+                }
+            }, 650);
+        }
+        collapse.prototype.animate = function (obj, json) {
+            var that = this;
+            clearInterval (obj.timer);
+            obj.timer = setInterval (function () {
+                var flag = true;//所有属性都到达目标了 可以清理定时器了
+                for (var k in json) {
+                    obj.leader = parseInt (that.getStyle (obj, k)) || 0;
+                    obj.target = json[k];
+                    obj.step = (obj.target - obj.leader) / 10;
+                    obj.step = obj.step > 0 ? Math.ceil (obj.step) : Math.floor (obj.step);
+                    obj.leader = obj.leader + obj.step;
+                    if (Math.abs (obj.target - obj.leader) > Math.abs (obj.step)) {
+                        obj.style[k] = obj.leader + "px";
+                    } else {
+                        obj.style[k] = obj.target + "px";
+                    }
+                    if (obj.leader != obj.target) {
+                        flag = false;//只要有一个没达到 就告诉标记不能清理
+                    }
+                }
+                //判断 是否都到达目标了
+                if (flag) {
+                    clearInterval (obj.timer);
+                }
+            }, 15)
+        }
+        collapse.prototype.getStyle = function (obj, attr) {
+            if (obj && obj.currentStyle) {
+                return obj.currentStyle[attr];//IE678
+            } else {
+                return window.getComputedStyle (obj, null)[attr];
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+</body>
+</html>

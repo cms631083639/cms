@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #btn {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+    <script>
+        for (var i = 0 ; i < 300 ; i++) {
+            document.write (i + "<br>");
+        }
+        window.onload = function () {
+            new backTop ("btn");
+        }
+        function backTop (id) {
+            var that = this;
+            this.i = 0;
+            this.bSys = true;
+            this.time = null;
+            this.btn = document.getElementById (id);
+            window.onscroll = function () {
+                that.backscroll ();
+            }
+            this.btn.onclick = function () {
+                that.goback ();
+            }
+        }
+        backTop.prototype.backscroll = function () {
+            if (this.bSys == false) {
+                clearInterval (this.time);
+            }
+            this.bSys = false;
+        }
+        backTop.prototype.goback = function () {
+            var that = this;
+            this.time = setInterval (function () {
+                that.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                that.speed = Math.floor (-that.scrollTop / 8);
+                if (that.scrollTop == 0) {
+                    clearInterval (that.time);
+                }
+                that.i = 0;
+                that.bSys = true;
+                document.body.scrollTop = document.documentElement.scrollTop = that.scrollTop + that.speed;
+            }, 30)
+        }
+        ;
+    </script>
+</head>
+<body>
+<input type="button" id="btn" value="回到顶部"/>
+</body>
+</html>

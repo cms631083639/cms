@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性运动</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        ul {
+            width: 400px;
+            height: 30px;
+            position: relative;
+            margin: 100px auto 0;
+        }
+
+        li {
+            float: left;
+            width: 98px;
+            height: 28px;
+            line-height: 28;
+            border: 1px solid #ccc;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bg {
+            width: 100px;
+            height: 5px;
+            overflow: hidden;
+            background: red;
+            border: none;
+            position: absolute;
+            top: 24px;
+            left: 0;
+            z-index: 1;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var ul = document.getElementById('ul1');
+            var li = ul.getElementsByTagName('li');
+            var bg = li[li.length - 1];
+            for (var i = 0; i < li.length; i++) {
+                li[i].onmouseenter = function () {
+                    startMove(bg, this.offsetLeft);
+                }
+            }
+        }
+        var speed = 0;
+        var left = 0
+        function startMove(obj, target) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                speed += (target - obj.offsetLeft) / 5;
+                left += speed;
+                obj.style.left = left + 'px';
+                speed *= 0.7;
+                document.title = obj.offsetLeft + "||" + target;
+            }, 30);
+        }
+    </script>
+</head>
+<body>
+<ul id='ul1'>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li class='bg'></li>
+</ul>
+</body>
+</html>

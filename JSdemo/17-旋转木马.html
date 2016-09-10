@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul, li {
+            list-style: none;
+
+        }
+
+        .wrap {
+            width: 1200px;
+            margin: 100px auto;
+        }
+
+        .slide {
+            height: 500px;
+            position: relative;
+            border: 1px solid red;
+        }
+
+        .slide li {
+            position: absolute;
+            left: 200px;
+            top: 0;
+            width: 100%;
+            height: 500px;
+            background-color: green;
+        }
+
+        .arrow {
+            opacity: 0;
+        }
+
+        .prev, .next {
+            width: 76px;
+            height: 112px;
+            position: absolute;
+            top: 50%;
+            margin-top: -56px;
+            z-index: 99;
+            background-color: red;
+        }
+
+        .next {
+            right: 0;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var config = [
+                {
+                    "width": 400,
+                    "top": 0,
+                    "left": 50,
+                    "opacity": 0.2,
+                    "zIndex": 2
+                },//0
+                {
+                    "width": 600,
+                    "top": 50,
+                    "left": 0,
+                    "opacity": 0.8,
+                    "zIndex": 3
+                },//1
+                {
+                    "width": 800,
+                    "top": 100,
+                    "left": 200,
+                    "opacity": 1,
+                    "zIndex": 4
+                },//2
+                {
+                    "width": 600,
+                    "top": 50,
+                    "left": 600,
+                    "opacity": 0.8,
+                    "zIndex": 3
+                },//3
+                {
+                    "width": 400,
+                    "top": 0,
+                    "left": 750,
+                    "opacity": 0.2,
+                    "zIndex": 2
+                }//4
+            ];
+            var wrap = document.getElementById("wrap");
+            var slide = document.getElementById("slide");
+            var ul = slide.children[0];
+            var lis = ul.children;
+            var arrow = document.getElementById("arrow");
+            var arrLeft = document.getElementById("arrLeft");
+            var arrRight = document.getElementById("arrRight");
+            wrap.onmouseover = function () {
+                arrow.style.zIndex = 99;
+                animate(arrow, {"opacity": 1});
+
+            }
+            wrap.onmouseout = function () {
+                animate(arrow, {"opacity": 0});
+            }
+            assign();
+            function assign() {
+                for (var i = 0; i < config.length; i++) {
+                    animate(lis[i], config[i], function () {
+                        flag = true;
+                        return flag;
+                    });
+                }
+            }
+
+            arrLeft.onclick = function () {
+                if (flag) {
+                    flag = false
+                    config.unshift(config.pop());
+                    assign();
+                }
+            }
+            arrRight.onclick = function () {
+                if (flag) {
+                    flag = false;
+                    config.push(config.shift());
+                    assign();
+                }
+            }
+            function animate(obj, json, fn) {
+                clearInterval(obj.timeID);
+                obj.timeID = setInterval(function () {
+                    var flag = true;
+                    for (var key in json) {
+                        if (key == "opacity") {
+                            var leader = parseInt(getStyle(obj, key) * 100);
+                            var target = json[key] * 100;
+                            var step = (target - leader) / 10;
+                            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                            leader = leader + step;
+                            obj.style[key] = leader / 100;
+                        } else if (key == "zIndex") {
+                            obj.style[key] = json[key];
+                        } else {
+                            var leader = parseInt(getStyle(obj, key)) || 0;
+                            var target = json[key];
+                            var step = (target - leader) / 8;
+                            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                            leader = leader + step;
+                            if (Math.abs(target - leader) > Math.abs(step)) {
+                                obj.style[key] = leader + "px";
+                            } else {
+                                clearInterval(obj.time);
+                                obj.style[key] = target + "px";
+                            }
+                        }
+                        if (target != leader) {
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        clearInterval(obj.timeID);
+                        if (fn) {
+                            fn();
+                        }
+                    }
+                }, 15)
+            }
+
+            function getStyle(obj, attr) {
+                if (obj && obj.currentStyle) {
+                    return obj.currentStyle[attr];
+                } else {
+                    return window.getComputedStyle(obj, null)[attr];
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="wrap" id="wrap">
+    <div class="slide" id="slide">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="arrow" id="arrow">
+            <a href="javascript:;" class="prev" id="arrLeft"></a>
+            <a href="javascript:;" class="next" id="arrRight"></a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 322px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            overflow: hidden;
+        }
+
+        span {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 20px;
+            /*background-color: red;*/
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <span id="closeButton"></span>
+
+    <div class="hd" id="headPart">
+        <img src="images/t.jpg" alt=""/>
+    </div>
+    <div id="bottomPart" class="bd">
+        <img src="images/b.jpg" alt=""/>
+    </div>
+</div>
+<script>
+    var box = document.getElementById ("box");
+    var close = document.getElementById ("closeButton")
+    var head = document.getElementById ("headPart");
+    var bottom = document.getElementById ("bottomPart");
+    close.onclick = function () {
+        animate (bottom, {"height": 0, "opacity": 0.2}, function () {
+            animate (box, {"width": 0});
+        })
+    }
+
+
+    function getStyle (obj, attr) {
+        if (obj && obj.currentStyle) {
+            return obj.currentStyle[attr];
+        } else {
+            return getComputedStyle (obj, null)[attr];
+        }
+    }
+    function animate (obj, json, fn) {
+        clearInterval (obj.time);
+        obj.time = setInterval (function () {
+            var flag = true;
+            for (var key in json) {
+                if (key == "opacity") {
+                    var leader = parseInt (getStyle (obj, key) * 100);
+                    var target = json[key] * 100;
+                    var step = (target - leader) / 10;
+                    step = step > 0 ? Math.ceil (step) : Math.floor (step);
+                    leader = leader + step;
+                    obj.style[key] = leader / 100;
+                } else if (key == "zIndex") {
+                    obj.style[key] = json[key];
+
+                } else {
+                    var leader = parseInt (getStyle (obj, key));
+                    var target = json[key];
+                    var step = (target - leader) / 10;
+                    step = step > 0 ? Math.ceil (step) : Math.floor (step);
+                    leader = leader + step;
+                    obj.style[key] = leader + "px";
+                }
+                if (leader != target) {
+                    flag = false;
+                }
+                if (flag) {
+                    clearInterval (obj.time);
+                    if (fn) {
+                        fn ();
+                    }
+                }
+
+            }
+        }, 15)
+    }
+</script>
+</body>
+</html>   

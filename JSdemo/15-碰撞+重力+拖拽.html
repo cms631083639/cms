@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>碰撞+拖拽</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+        div {
+            width: 2px;
+            height: 2px;
+            background-color: #000;
+            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    //    拖拽部分
+    div1.onmousedown = function (e) {
+        var e = e || window.event;
+        var disX = e.offsetX;
+        var disY = e.offsetY;
+        //    初始化最后一个点,也就是鼠标松开时的X,Y坐标点
+        var lastX = 0
+        var lastY = 0
+        document.onmousemove = function (e) {
+            var e = e || window.event;
+            var l = e.clientX - disX;
+            var t = e.clientY - disY;
+            div1.style.left = l + 'px';
+            div1.style.top = t + 'px';
+//            X轴的差值
+            speedx = l - lastX;
+//            Y轴的差值
+            speedy = t - lastY;
+//            更新最后一次点的位置
+            lastX = l;
+            lastY = t;
+//            观测speed X和Y的值
+//            document.title = speedX + "||" + speedY;
+//            观察小黑点轨迹
+//            var box = document.createElement('div');
+//            box.style.left = l + 'px';
+//            box.style.top = t + 'px';
+//            document.body.appendChild(box);
+        }
+        document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+            startMove();
+        }
+        //避免多次拖拽产生的bug
+        clearInterval(timer);
+    }
+    var timer = null;
+    var speedx = 0, speedy = 0;
+
+    function startMove() {
+        clearInterval(timer);
+        timer = setInterval(function () {
+            speedy += 3;
+
+            var l = div1.offsetLeft + speedx;
+            var t = div1.offsetTop + speedy;
+            //垂直方向碰撞速度反转
+            if (t >= document.documentElement.clientHeight - div1.offsetHeight) {
+                t = document.documentElement.clientHeight - div1.offsetHeight;
+                //纵向碰撞，横向速度也减少
+                speedy *= -0.8;
+                speedx *= 0.8;
+            } else if (t <= 0) {
+                speedy *= -1;
+                speedx *= 0.8;
+            }
+            //水平方向碰撞速度翻转
+            if (l > document.documentElement.clientWidth - div1.offsetWidth) {
+                l = document.documentElement.clientWidth - div1.offsetWidth;
+                speedx *= -0.8;
+            } else if (l < 0) {
+                speedx *= -0.8
+            }
+            //防止速度为负时,底部滑动
+            if (Math.abs(speedx) < 1) {
+                speedx = 0;
+            }
+            if (Math.abs(speedy) < 1) {
+                speedy = 0
+            }
+//            运动终止条件
+            if (speedx == 0 && speedy == 0 && t == document.documentElement.clientHeight - div1.offsetHeight) {
+                clearInterval(timer);
+            }
+//            看是否终止
+//            console.log(speedx + "||" + l);
+            div1.style.left = l + 'px';
+            div1.style.top = t + 'px';
+        }, 30)
+    }
+</script>

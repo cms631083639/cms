@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #loop {
+            width: 100px;
+            height: 150px;
+            border-bottom: 1px solid #000;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        ul {
+            /*font-size: 0;*/
+            width: calc(8 * 100px);
+            position: relative;
+            left: 0;
+            top: 0;
+            transition: .3s;
+        }
+
+        ul li {
+            width: 100px;
+            height: 100px;
+            border: 1px solid mediumspringgreen;
+            float: left;
+            box-sizing: border-box;
+
+        }
+
+        ul li:nth-child(1) {
+            background-color: red;
+        }
+
+        ul li:nth-child(2) {
+            background-color: orange;
+        }
+
+        ul li:nth-child(3) {
+            background-color: yellow;
+        }
+
+        ul li:nth-child(4) {
+            background-color: green;
+        }
+
+        ul li:nth-child(5) {
+            background-color: blue;
+        }
+
+        ul li:nth-child(6) {
+            background-color: midnightblue;
+        }
+
+        ul li:nth-child(7) {
+            background-color: purple;
+        }
+
+        ul li:nth-child(8) {
+            background-color: red;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id='loop'>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+    (function () {
+        var loop = document.getElementById('loop');
+        var ul = loop.querySelector('ul');
+        var li = ul.querySelectorAll('li');
+        var liwidth = li[0].offsetWidth;
+        var index = 0;
+        var timer = null;
+        timer = setInterval(function () {
+            ul.style.transition = "all .3s";
+            index++;
+            ul.style.transform = "translateX(" + (-index * liwidth) + "px)";
+        }, 1000)
+        ul.addEventListener('transitionend', function () {
+            if (index == li.length - 1) {
+                index = 0;
+                ul.style.transition = "none";
+                ul.style.transform = "translateX(" + (-index * liwidth) + "px)";
+            }
+        })
+    })();
+</script>
+</body>
+</html>

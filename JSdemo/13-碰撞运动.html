@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            position: absolute;
+            z-index: 1;
+        }
+
+        /*#div2 {*/
+        /*width: 100px;*/
+        /*height: 100px;*/
+        /*position: absolute;*/
+        /*left: 50%;*/
+        /*top: 50%;*/
+        /*transform: translate(-50%, -50%);*/
+        /*background-color: blue;*/
+
+        /*}*/
+    </style>
+</head>
+<body>
+<input type="button" value="开始" id='btn'>
+<div id="div1">
+</div>
+<div id="div2">
+</div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    var btn = document.getElementById('btn');
+    var speedx = 32, speedy = 8;
+    var timer = null;
+    btn.onclick = function () {
+        clearInterval(timer);
+        timer = setInterval(function () {
+            speedy += 3;
+            var l = div1.offsetLeft + speedx;
+            var t = div1.offsetTop + speedy;
+            //垂直方向碰撞速度反转
+            if (t >= document.documentElement.clientHeight - div1.offsetHeight) {
+                t = document.documentElement.clientHeight - div1.offsetHeight;
+                //纵向碰撞，横向速度也减少
+                speedy *= -0.8;
+                speedx *= 0.8;
+            } else if (t <= 0) {
+                speedy *= -1;
+                speedx *= 0.8;
+            }
+            //水平方向碰撞速度翻转
+            if (l > document.documentElement.clientWidth - div1.offsetWidth) {
+                l = document.documentElement.clientWidth - div1.offsetWidth;
+                speedx *= -0.8;
+            } else if (l < 0) {
+                speedx *= -0.8
+            }
+            if (Math.abs(speedx) < 1) {
+                speedx = 0;
+            }
+            if (Math.abs(speedy) < 1) {
+                speedy = 0
+            } else {
+                div1.style.left = l + 'px';
+                div1.style.top = t + 'px';
+            }
+            if( speedx == 0 && speedy == 0 && t == document.documentElement.clientHeight - div1.offsetHeight ) {
+                clearInterval(timer);
+            }
+            console.log(speedx + "||" + l);
+        }, 30)
+    }
+</script>

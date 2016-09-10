@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 350px;
+            height: 350px;
+            margin: 100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+
+        .mask {
+            width: 174px;
+            height: 174px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            display: none;
+        }
+
+        .small {
+            position: relative;
+        }
+
+        .box img {
+            vertical-align: top;
+        }
+
+        #bigBox > img {
+            position: absolute;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            new magnify ("box");
+        }
+        magnify.prototype.imgShow = function () {
+            this.mask.style.display = "block";
+            this.bigBox.style.display = "block";
+        }
+        magnify.prototype.imgHide = function () {
+            this.mask.style.display = "none";
+            this.bigBox.style.display = "none";
+        }
+        magnify.prototype.imgMove = function (ev) {
+            var ev = ev || window.event;
+            //页面中的位置
+            this.smallBox.pageX = ev.pageX || ev.clientX + document.documentElement.scrollLeft;
+            this.smallBox.pageY = ev.pageY || ev.clientY + document.documentElement.scrollTop;
+            //在盒子中的位置
+            this.smallBox.boxX = this.smallBox.pageX - this.box.offsetLeft;//box有定位 所以不能用smallBox
+            this.smallBox.boxY = this.smallBox.pageY - this.box.offsetTop;
+            //设置遮罩位置
+            this.smallBox.maskX = this.smallBox.boxX - this.mask.offsetWidth / 2;
+            this.smallBox.maskY = this.smallBox.boxY - this.mask.offsetHeight / 2
+            //限制遮罩位置
+            if (this.smallBox.maskX < 0) {
+                this.smallBox.maskX = 0;
+            }
+            if (this.smallBox.maskX > this.smallBox.offsetWidth - this.mask.offsetWidth) {
+                this.smallBox.maskX = this.smallBox.offsetWidth - this.mask.offsetWidth;
+            }
+            if (this.smallBox.maskY < 0) {
+                this.smallBox.maskY = 0;
+            }
+            if (this.smallBox.maskY > this.smallBox.offsetHeight - this.mask.offsetHeight) {
+                this.smallBox.maskY = this.smallBox.offsetHeight - this.mask.offsetHeight;
+            }
+            this.mask.style.left = this.smallBox.maskX + "px";
+            this.mask.style.top = this.smallBox.maskY + "px";
+            //根据比例移动大图片
+            //和遮罩成比例 而且是反方向
+            this.bigImg.style.left = -this.smallBox.maskX * this.bigImg.offsetWidth / this.box.offsetWidth + "px";
+            this.bigImg.style.top = -this.smallBox.maskY * this.bigImg.offsetHeight / this.box.offsetHeight + "px";
+        }
+        function magnify (id) {
+            //找人
+            var that = this;
+            this.box = document.getElementById (id);
+            this.smallBox = document.getElementById ("smallBox");
+            this.bigBox = document.getElementById ("bigBox");
+            this.mask = document.getElementById ("mask");
+            this.bigImg = document.getElementById ("bigImg");
+            //鼠标经过显示mask和bigBox
+            this.smallBox.onmouseover = function () {
+                that.imgShow ();
+            }
+            this.smallBox.onmouseout = function () {
+                that.imgHide ();
+            }
+            //鼠标在小盒子中移动的时候 获取位置 并移动mask
+            this.smallBox.onmousemove = function () {
+                that.imgMove ();
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="small" id="smallBox">
+        <img src="images/001.jpg" width="350" alt=""/>
+
+        <div class="mask" id="mask"></div>
+    </div>
+    <div class="big" id="bigBox">
+        <img id="bigImg" src="images/0001.jpg" width="800" alt=""/>
+    </div>
+</div>
+</body>
+</html>
