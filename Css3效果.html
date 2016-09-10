@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            perspective: 500px;
+            background-color: #000000;
+
+        }
+        @keyframes animat {
+            from{}
+            to{
+                transform: rotateY(360deg) rotateX(360deg);
+            }
+        }
+        #bigBox {
+            width: 500px;
+            height: 500px;
+            /*background-color: white;*/
+            /*opacity: .5;*/
+            /*border: 2px solid #ffffff;*/
+            position: relative;
+            margin: 100px auto;
+            border-radius: 50%;
+            box-shadow:inset 0px 0px 100px #ffffff;
+
+        }
+        #box {
+            height: 50px;
+            width: 50px;
+            /*border: 1px solid #000;*/
+            /*background-color: #CC00FF;*/
+            position: relative;
+            margin:auto;
+            top: 225px;
+            transform-style: preserve-3d;
+            animation: animat 5s infinite linear;
+            /*transform: rotateY(45deg);*/
+        }
+
+
+        #box div {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            /*background-color: greenyellow;*/
+            border: 2px solid white;
+            /*opacity: .5;*/
+            /*border-radius: 50%;*/
+            transition: all 1s;
+            /*box-shadow: 0px 0px 30px white;*/
+
+        }
+        .div1 {
+            transform: rotateY(20deg) translateZ(200px);
+
+        }
+        .div2 {
+            transform: rotateY(40deg) translateZ(200px);
+        }
+        .div3 {
+            transform: rotateY(60deg) translateZ(200px);
+        }
+        .div4 {
+            transform: rotateY(80deg) translateZ(200px);
+        }
+        .div5 {
+            transform: rotateY(100deg) translateZ(200px);
+        }
+        .div6 {
+            transform: rotateY(120deg) translateZ(200px);
+        }
+        .div7 {
+            transform: rotateY(140deg) translateZ(200px);
+        }
+        .div8 {
+            transform: rotateY(160deg) translateZ(200px);
+        }
+        .div9 {
+            transform: rotateY(180deg) translateZ(200px);
+        }
+        .div10 {
+            transform: rotateY(200deg) translateZ(200px);
+        }
+        .div11 {
+            transform: rotateY(220deg) translateZ(200px);
+        }
+        .div12 {
+            transform: rotateY(240deg) translateZ(200px);
+        }
+        .div13 {
+            transform: rotateY(260deg) translateZ(200px);
+        }
+        .div14 {
+            transform: rotateY(280deg) translateZ(200px);
+        }
+        .div15 {
+            transform: rotateY(300deg) translateZ(200px);
+        }
+        .div16 {
+            transform: rotateY(320deg) translateZ(200px);
+        }
+        .div17 {
+            transform: rotateY(340deg) translateZ(200px);
+        }
+        .div18 {
+            transform: rotateY(360deg) translateZ(200px);
+
+        }
+        .div19 {
+            transform: rotateX(20deg) translateZ(200px);
+        }
+        .div20 {
+            transform: rotateX(40deg) translateZ(200px);
+        }
+        .div21 {
+            transform: rotateX(60deg) translateZ(200px);
+        }
+        .div22 {
+            transform: rotateX(80deg) translateZ(200px);
+        }
+        .div23 {
+            transform: rotateX(100deg) translateZ(200px);
+        }
+        .div24 {
+            transform: rotateX(120deg) translateZ(200px);
+        }
+        .div25 {
+            transform: rotateX(140deg) translateZ(200px);
+        }
+        .div26 {
+            transform: rotateX(180deg) translateZ(200px);
+        }
+        .div27 {
+            transform: rotateX(200deg) translateZ(200px);
+        }
+        .div28 {
+            transform: rotateX(220deg) translateZ(200px);
+        }
+        .div29 {
+            transform: rotateX(240deg) translateZ(200px);
+        }
+        .div30 {
+            transform: rotateX(280deg) translateZ(200px);
+        }
+        .div31 {
+            transform: rotateX(300deg) translateZ(200px);
+        }
+        .div32 {
+            transform: rotateX(320deg) translateZ(200px);
+        }
+        .div33 {
+            transform: rotateX(340deg) translateZ(200px);
+        }
+        .div34 {
+            transform: rotateX(360deg) translateZ(200px);
+        }
+        .div35 {
+            transform: rotateX(160deg) translateZ(200px);
+        }
+        .div36 {
+            transform: rotateX(260deg) translateZ(200px);
+        }
+
+
+
+        #big {
+            position: absolute;
+            /*display: block;*/
+            left: 300px;
+            /*background-color: red;*/
+            font-size: 30px;
+            font-family: "微软雅黑";
+            font-weight: 700;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+<div id="big">鼠标移入圆心</div>
+<div id="bigBox">
+    <div id="box">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+        <div class="div5"></div>
+        <div class="div6"></div>
+        <div class="div7"></div>
+        <div class="div8"></div>
+        <div class="div9"></div>
+        <div class="div10"></div>
+        <div class="div11"></div>
+        <div class="div12"></div>
+        <div class="div13"></div>
+        <div class="div14"></div>
+        <div class="div15"></div>
+        <div class="div16"></div>
+        <div class="div17"></div>
+        <div class="div18"></div>
+        <div class="div19"></div>
+        <div class="div20"></div>
+        <div class="div21"></div>
+        <div class="div22"></div>
+        <div class="div23"></div>
+        <div class="div24"></div>
+        <div class="div25"></div>
+        <div class="div26"></div>
+        <div class="div27"></div>
+        <div class="div28"></div>
+        <div class="div29"></div>
+        <div class="div30"></div>
+        <div class="div31"></div>
+        <div class="div32"></div>
+        <div class="div33"></div>
+        <div class="div34"></div>
+        <div class="div35"></div>
+        <div class="div36"></div>
+        <div class="div37"></div>
+        <div class="div38"></div>
+        <div class="div39"></div>
+        <div class="div40"></div>
+        <div class="div41"></div>
+        <div class="div42"></div>
+        <div class="div43"></div>
+        <div class="div44"></div>
+        <div class="div45"></div>
+        <div class="div46"></div>
+        <div class="div47"></div>
+        <div class="div48"></div>
+        <div class="div49"></div>
+        <div class="div50"></div>
+        <div class="div51"></div>
+        <div class="div52"></div>
+        <div class="div53"></div>
+        <div class="div54"></div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var hov = document.getElementById("bigBox");
+    //    var btn = document.getElementById("big")
+    var box = document.getElementById("box");
+    var divs = box.children;
+    hov.onmouseover = function(){
+
+        divs[0].style.transform ="rotateY(20deg) translateZ(350px)";
+        divs[1].style.transform ="rotateY(40deg) translateZ(350px)";
+        divs[2].style.transform ="rotateY(60deg) translateZ(350px)";
+        divs[3].style.transform ="rotateY(80deg) translateZ(350px)";
+        divs[4].style.transform ="rotateY(100deg) translateZ(350px)";
+        divs[5].style.transform ="rotateY(120deg) translateZ(350px)";
+        divs[6].style.transform ="rotateY(140deg) translateZ(350px)";
+        divs[7].style.transform ="rotateY(160deg) translateZ(350px)";
+        divs[8].style.transform ="rotateY(180deg) translateZ(350px)";
+        divs[9].style.transform ="rotateY(200deg) translateZ(350px)";
+        divs[10].style.transform ="rotateY(220deg) translateZ(350px)";
+        divs[11].style.transform ="rotateY(240deg) translateZ(350px)";
+        divs[12].style.transform ="rotateY(260deg) translateZ(350px)";
+        divs[13].style.transform ="rotateY(280deg) translateZ(350px)";
+        divs[14].style.transform ="rotateY(300deg) translateZ(350px)";
+        divs[15].style.transform ="rotateY(320deg) translateZ(350px)";
+        divs[16].style.transform ="rotateY(340deg) translateZ(350px)";
+        divs[17].style.transform ="rotateY(360deg) translateZ(350px)";
+        divs[18].style.transform ="rotateX(20deg) translateZ(350px)";
+        divs[19].style.transform ="rotateX(40deg) translateZ(350px)";
+        divs[20].style.transform ="rotateX(60deg) translateZ(350px)";
+        divs[21].style.transform ="rotateX(80deg) translateZ(350px)";
+        divs[22].style.transform ="rotateX(100deg) translateZ(350px)";
+        divs[23].style.transform ="rotateX(120deg) translateZ(350px)";
+        divs[24].style.transform ="rotateX(140deg) translateZ(350px)";
+        divs[25].style.transform ="rotateX(160deg) translateZ(350px)";
+        divs[26].style.transform ="rotateX(180deg) translateZ(350px)";
+        divs[27].style.transform ="rotateX(200deg) translateZ(350px)";
+        divs[28].style.transform ="rotateX(220deg) translateZ(350px)";
+        divs[29].style.transform ="rotateX(240deg) translateZ(350px)";
+        divs[30].style.transform ="rotateX(260deg) translateZ(350px)";
+        divs[31].style.transform ="rotateX(280deg) translateZ(350px)";
+        divs[32].style.transform ="rotateX(300deg) translateZ(350px)";
+        divs[33].style.transform ="rotateX(320deg) translateZ(350px)";
+        divs[34].style.transform ="rotateX(340deg) translateZ(350px)";
+        divs[35].style.transform ="rotateX(360deg) translateZ(350px)";
+
+        divs[36].style.transform ="rotateY(90deg) rotateX(360deg) translateZ(200px)";
+        divs[37].style.transform ="rotateY(90deg) rotateX(20deg) translateZ(200px)";
+        divs[38].style.transform ="rotateY(90deg) rotateX(40deg) translateZ(200px)";
+        divs[39].style.transform ="rotateY(90deg) rotateX(60deg) translateZ(200px)";
+        divs[40].style.transform ="rotateY(90deg) rotateX(80deg) translateZ(200px)";
+        divs[41].style.transform ="rotateY(90deg) rotateX(100deg) translateZ(200px)";
+        divs[42].style.transform ="rotateY(90deg) rotateX(120deg) translateZ(200px)";
+        divs[43].style.transform ="rotateY(90deg) rotateX(140deg) translateZ(200px)";
+        divs[44].style.transform ="rotateY(90deg) rotateX(160deg) translateZ(200px)";
+        divs[45].style.transform ="rotateY(90deg) rotateX(180deg) translateZ(200px)";
+        divs[46].style.transform ="rotateY(90deg) rotateX(200deg) translateZ(200px)";
+        divs[47].style.transform ="rotateY(90deg) rotateX(220deg) translateZ(200px)";
+        divs[48].style.transform ="rotateY(90deg) rotateX(240deg) translateZ(200px)";
+        divs[49].style.transform ="rotateY(90deg) rotateX(260deg) translateZ(200px)";
+        divs[50].style.transform ="rotateY(90deg) rotateX(280deg) translateZ(200px)";
+        divs[51].style.transform ="rotateY(90deg) rotateX(300deg) translateZ(200px)";
+        divs[52].style.transform ="rotateY(90deg) rotateX(320deg) translateZ(200px)";
+        divs[53].style.transform ="rotateY(90deg) rotateX(340deg) translateZ(200px)";
+
+    }
+    hov.onmouseout = function(){
+        divs[0].style.transform ="rotateY(20deg) translateZ(200px)";
+        divs[1].style.transform ="rotateY(40deg) translateZ(200px)";
+        divs[2].style.transform ="rotateY(60deg) translateZ(200px)";
+        divs[3].style.transform ="rotateY(80deg) translateZ(200px)";
+        divs[4].style.transform ="rotateY(100deg) translateZ(200px)";
+        divs[5].style.transform ="rotateY(120deg) translateZ(200px)";
+        divs[6].style.transform ="rotateY(140deg) translateZ(200px)";
+        divs[7].style.transform ="rotateY(160deg) translateZ(200px)";
+        divs[8].style.transform ="rotateY(180deg) translateZ(200px)";
+        divs[9].style.transform ="rotateY(200deg) translateZ(200px)";
+        divs[10].style.transform ="rotateY(220deg) translateZ(200px)";
+        divs[11].style.transform ="rotateY(240deg) translateZ(200px)";
+        divs[12].style.transform ="rotateY(260deg) translateZ(200px)";
+        divs[13].style.transform ="rotateY(280deg) translateZ(200px)";
+        divs[14].style.transform ="rotateY(300deg) translateZ(200px)";
+        divs[15].style.transform ="rotateY(320deg) translateZ(200px)";
+        divs[16].style.transform ="rotateY(340deg) translateZ(200px)";
+        divs[17].style.transform ="rotateY(360deg) translateZ(200px)";
+        divs[18].style.transform ="rotateX(20deg) translateZ(200px)";
+        divs[19].style.transform ="rotateX(40deg) translateZ(200px)";
+        divs[20].style.transform ="rotateX(60deg) translateZ(200px)";
+        divs[21].style.transform ="rotateX(80deg) translateZ(200px)";
+        divs[22].style.transform ="rotateX(100deg) translateZ(200px)";
+        divs[23].style.transform ="rotateX(120deg) translateZ(200px)";
+        divs[24].style.transform ="rotateX(140deg) translateZ(200px)";
+        divs[25].style.transform ="rotateX(160deg) translateZ(200px)";
+        divs[26].style.transform ="rotateX(180deg) translateZ(200px)";
+        divs[27].style.transform ="rotateX(200deg) translateZ(200px)";
+        divs[28].style.transform ="rotateX(220deg) translateZ(200px)";
+        divs[29].style.transform ="rotateX(240deg) translateZ(200px)";
+        divs[30].style.transform ="rotateX(260deg) translateZ(200px)";
+        divs[31].style.transform ="rotateX(280deg) translateZ(200px)";
+        divs[32].style.transform ="rotateX(300deg) translateZ(200px)";
+        divs[33].style.transform ="rotateX(320deg) translateZ(200px)";
+        divs[34].style.transform ="rotateX(340deg) translateZ(200px)";
+        divs[35].style.transform ="rotateX(360deg) translateZ(200px)";
+
+
+        divs[37].style.transform ="";
+        divs[38].style.transform ="";
+        divs[39].style.transform ="";
+        divs[40].style.transform ="";
+        divs[41].style.transform ="";
+        divs[42].style.transform ="";
+        divs[43].style.transform ="";
+        divs[44].style.transform ="";
+        divs[45].style.transform ="";
+        divs[46].style.transform ="";
+        divs[47].style.transform ="";
+        divs[48].style.transform ="";
+        divs[49].style.transform ="";
+        divs[50].style.transform ="";
+        divs[51].style.transform ="";
+        divs[52].style.transform ="";
+        divs[53].style.transform ="";
+        divs[36].style.transform ="";
+    }
+</script>
