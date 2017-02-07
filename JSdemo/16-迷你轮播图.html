@@ -110,5 +110,28 @@
         })
     })();
 </script>
+<!--(function () {-->
+    <!--var loop = document.getElementById('loop');-->
+    <!--var ul = loop.querySelector('ul');-->
+    <!--var li = ul.querySelectorAll('li');-->
+    <!--var length = li.length;-->
+    <!--var liwidth = li[0].offsetWidth;-->
+    <!--var index = 0;-->
+    <!--setInterval(function () {-->
+        <!--if (index == li.length - 1) {-->
+            <!--index = 0;-->
+            <!--ul.style.webkitTransition = "none";-->
+            <!--ul.style.transition = "none";-->
+            <!--ul.style.webkitTransform = "translateX(" + (-index * liwidth) + "px)";-->
+            <!--ul.style.transform = "translateX(" + (-index * liwidth) + "px)";-->
+
+        <!--}-->
+        <!--ul.style.webkitTransition = "all .5s";-->
+        <!--ul.style.transition = "all .3s";-->
+        <!--index++;-->
+        <!--ul.style.webkitTransform = "translateX(" + (-index * liwidth) + "px)";-->
+        <!--ul.style.transform = "translateX(" + (-index * liwidth) + "px)";-->
+    <!--}, 1000)-->
+<!--})();-->
 </body>
 </html>
